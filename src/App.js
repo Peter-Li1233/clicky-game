@@ -139,7 +139,7 @@ class App extends Component {
   }
 
   render() {
-    const {results, searchTerm, searchKey, score} = this.state;
+    const {results, searchTerm, searchKey, score, error} = this.state;
 
     let gameResult;
     if (score === 0) {
@@ -160,18 +160,17 @@ class App extends Component {
         <Scorebar score = {score} searchTerm = {searchTerm} onSearchChange = {this.onSearchChange} onSearchSubmit ={this.onSearchSubmit}>
           {gameResult}
         </Scorebar>
-        {/* <Search 
-            value={searchTerm}
-            onChange={this.onSearchChange}
-            onSubmit={this.onSearchSubmit}
-          >
-            Search
-        </Search> */}
-        <Table
+
+        {error
+        ? <div className="interactions">
+          <p>Something went wrong</p>
+        </div>
+        : <Table
           onClick={this.onClick}
           list = {list}
           searchKey={this.state.searchKey}
         />
+        }
       </div>
     );
   }
